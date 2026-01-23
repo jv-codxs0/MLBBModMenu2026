@@ -25,11 +25,11 @@
 
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* ADVANCED MLBB STYLE M LOGO */
+        /* REFINED MLBB STYLE LOGO */
         .ml-logo-container {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -38,13 +38,13 @@
         .ml-shield-svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4));
-            animation: logo-glow 2s infinite ease-in-out;
+            filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.5));
+            animation: logo-float 3s infinite ease-in-out;
         }
 
-        @keyframes logo-glow {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4)); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(255, 204, 0, 0.7)); }
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4)); }
+            50% { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 0 30px rgba(255, 204, 0, 0.8)); }
         }
 
         /* LOADING SCREEN */
@@ -64,7 +64,7 @@
         #get-started {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover;
             z-index: 900;
             display: none;
             flex-direction: column;
@@ -86,19 +86,21 @@
         .glass { 
             background: rgba(255, 255, 255, 0.03); 
             backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 204, 0, 0.1); 
+            border: 1px solid rgba(255, 204, 0, 0.15); 
         }
 
         .btn-gold { 
-            background: linear-gradient(90deg, #d4af37, #ffcc00); 
+            background: linear-gradient(135deg, #d4af37, #ffcc00, #b8860b); 
             color: #000;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-            transition: all 0.3s ease;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
         }
 
         .btn-gold:hover { 
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
+            transform: scale(1.03);
+            filter: brightness(1.2);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
         }
 
         .feature-list li {
@@ -108,11 +110,12 @@
             align-items: center;
             gap: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
 
         .feature-list li i {
             color: var(--ml-gold);
+            text-shadow: 0 0 8px var(--ml-gold);
         }
     </style>
 </head>
@@ -121,23 +124,26 @@
     <!-- LOADING SCREEN -->
     <div id="loader">
         <div class="ml-logo-container">
-            <!-- Custom SVG M Logo styled like MLBB -->
             <svg class="ml-shield-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Shield Background -->
-                <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0a1631" stroke="#ffcc00" stroke-width="2"/>
-                <!-- Stylized M -->
-                <path d="M30 70 L30 35 L50 55 L70 35 L70 70" fill="none" stroke="#ffcc00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Wing Accents -->
-                <path d="M20 30 L5 25 M80 30 L95 25" stroke="#ffcc00" stroke-width="2" stroke-linecap="round"/>
+                <!-- Outer Shield Border -->
+                <path d="M50 2 L90 18 L90 55 C90 78 50 98 50 98 C50 98 10 78 10 55 L10 18 L50 2 Z" fill="none" stroke="#ffcc00" stroke-width="1.5"/>
+                <!-- Inner Shield Fill -->
+                <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0f172a" stroke="#ffcc00" stroke-width="3"/>
+                <!-- Stylized M (MLBB Style) -->
+                <path d="M25 75 L25 30 L50 55 L75 30 L75 75" fill="none" stroke="#ffcc00" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter"/>
+                <!-- Bottom Point -->
+                <path d="M40 75 L50 85 L60 75" fill="none" stroke="#ffcc00" stroke-width="3"/>
+                <!-- Wing Tips -->
+                <path d="M15 20 L2 15 M85 20 L98 15" stroke="#ffcc00" stroke-width="2"/>
             </svg>
         </div>
-        <p class="font-orbitron text-[12px] tracking-[0.6em] text-yellow-500 mt-6 uppercase font-bold">Loading</p>
+        <p class="font-orbitron text-[12px] tracking-[0.6em] text-yellow-500 mt-8 uppercase font-bold">Loading</p>
     </div>
 
     <!-- GET STARTED SCREEN -->
     <div id="get-started">
         <div class="w-full max-w-md glass p-10 rounded-[2.5rem] shadow-2xl">
-            <h1 class="font-orbitron text-2xl font-bold italic mb-6 text-yellow-500 text-center">Mod Menu Info:</h1>
+            <h1 class="font-orbitron text-2xl font-bold italic mb-8 text-yellow-500 text-center">Mod Menu Info:</h1>
             
             <ul class="feature-list font-orbitron uppercase text-xs tracking-widest text-gray-200">
                 <li><i class="fas fa-eye"></i> Drone View (2x - 10x)</li>
@@ -161,30 +167,33 @@
             <div class="text-center mb-10">
                 <div class="inline-block mb-4">
                     <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0066ff22" stroke="#ffcc00" stroke-width="3"/>
-                        <path d="M30 70 L30 35 L50 55 L70 35 L70 70" fill="none" stroke="#ffcc00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0066ff11" stroke="#ffcc00" stroke-width="3"/>
+                        <path d="M25 75 L25 30 L50 55 L75 30 L75 75" fill="none" stroke="#ffcc00" stroke-width="8"/>
                     </svg>
                 </div>
                 <h1 class="text-4xl font-bold uppercase tracking-tight italic font-orbitron">
                     MLBB <span class="text-yellow-500">2026</span>
                 </h1>
-                <p class="text-[10px] uppercase font-bold text-blue-400 tracking-[0.5em] mt-2">Elite VIP Access</p>
+                <p class="text-[10px] uppercase font-bold text-blue-400 tracking-[0.5em] mt-2">Elite VIP Portal</p>
             </div>
 
             <!-- DOWNLOAD CARD -->
             <div class="glass p-10 rounded-[3rem] shadow-2xl space-y-6 text-center border-b-4 border-yellow-500">
                 <div class="grid gap-5">
-                    <!-- Unang Button -->
+                    <!-- Updated Mod Menu MLBB Link -->
                     <button onclick="downloadMirror1()" class="bg-blue-600 hover:bg-blue-500 w-full py-5 text-lg font-bold uppercase italic flex items-center justify-center gap-3 rounded-xl transition-all shadow-lg shadow-blue-900/40">
-                        <i class="fas fa-cloud-download-alt"></i> Mod Menu MLBB
+                        <i class="fas fa-shield-virus"></i> Mod Menu MLBB
                     </button>
 
-                    <!-- Pangalawang Button -->
+                    <!-- Updated MLBB VIP MOD MENU Link -->
                     <button onclick="downloadMirror2()" class="btn-gold w-full py-5 text-[11px] sm:text-xs font-bold uppercase italic flex items-center justify-center gap-3">
                         <i class="fas fa-crown"></i> DOWNLOAD MLBB VIP MOD MENU
                     </button>
                 </div>
-                <p class="text-[9px] text-gray-500 uppercase font-bold tracking-widest pt-2">System Version 3.1.24 - SECURED</p>
+                <div class="pt-4 flex items-center justify-center gap-2">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <p class="text-[9px] text-gray-400 uppercase font-bold tracking-[0.2em]">New Links Fixed - Anti-Error</p>
+                </div>
             </div>
         </div>
     </div>
@@ -213,15 +222,14 @@
             }, 400);
         }
 
-        // Mirror 1 Download
+        // Updated Mirror 1 Link (view URL to fix errors)
         function downloadMirror1() {
-            const id = '173n6LOfeSKB7CGXLEGrvAtOoRObv36CH';
-            window.location.href = `https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t`;
+            window.location.href = 'https://drive.google.com/file/d/173n6LOfeSKB7CGXLEGrvAtOoRObv36CH/view?usp=drivesdk';
         }
 
-        // Mirror 2 Download (VIP MOD)
+        // Updated Mirror 2 Link (view URL to fix errors)
         function downloadMirror2() {
-            window.location.href = 'https://drive.usercontent.google.com/download?id=1FjdDnYoayJIEm4BJDYxa0lbv2VZQcfiw&export=download&authuser=0';
+            window.location.href = 'https://drive.google.com/file/d/1FjdDnYoayJIEm4BJDYxa0lbv2VZQcfiw/view?usp=drivesdk';
         }
     </script>
 </body>
