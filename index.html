@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB 2026 | M-Portal</title>
+    <title>MLBB 2026 | Elite M-Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
         
         :root { 
+            --ml-gold: #ffcc00; 
             --ml-blue: #0066ff; 
-            --ml-dark: #050b18; 
+            --ml-dark: #020617; 
         }
 
         body { 
@@ -22,11 +23,35 @@
             overflow: hidden;
         }
 
-        /* LOADING SCREEN WITH "M" ICON */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* ADVANCED MLBB STYLE M LOGO */
+        .ml-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ml-shield-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4));
+            animation: logo-glow 2s infinite ease-in-out;
+        }
+
+        @keyframes logo-glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(255, 204, 0, 0.7)); }
+        }
+
+        /* LOADING SCREEN */
         #loader {
             position: fixed;
             inset: 0;
-            background: #050b18;
+            background: radial-gradient(circle at center, #0a1631 0%, #020617 100%);
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -35,71 +60,59 @@
             transition: opacity 0.4s ease;
         }
 
-        .m-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            font-weight: 700;
-            color: var(--ml-blue);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 15px rgba(0, 102, 255, 0.6));
-            animation: pulse-m 1.5s infinite ease-in-out;
+        /* GET STARTED SCREEN */
+        #get-started {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover;
+            z-index: 900;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
 
-        @keyframes pulse-m {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px rgba(0, 102, 255, 0.8); }
-        }
-
-        .loading-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.5em;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-        }
-
-        /* DASHBOARD UI */
+        /* MAIN CONTENT */
         #main-content { 
             opacity: 0; 
-            height: 100vh;
-            overflow-y: auto;
+            display: none;
             transition: opacity 0.5s ease;
         }
 
-        .ready #main-content { opacity: 1; }
+        .ready #main-content { opacity: 1; display: block; }
+        .ready body { overflow-y: auto; }
 
         .glass { 
             background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 204, 0, 0.1); 
         }
 
-        .btn-blue { 
-            background: linear-gradient(90deg, #0066ff, #00ccff); 
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+        .btn-gold { 
+            background: linear-gradient(90deg, #d4af37, #ffcc00); 
+            color: #000;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
             transition: all 0.3s ease;
         }
 
-        .btn-blue:hover { 
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(0, 102, 255, 0.5);
+        .btn-gold:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
         }
 
-        .btn-alt {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
-            transition: all 0.3s ease;
+        .feature-list li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #10b981;
+        .feature-list li i {
+            color: var(--ml-gold);
         }
     </style>
 </head>
@@ -107,93 +120,108 @@
 
     <!-- LOADING SCREEN -->
     <div id="loader">
-        <div class="m-logo">M</div>
-        <p class="loading-text">Loading</p>
+        <div class="ml-logo-container">
+            <!-- Custom SVG M Logo styled like MLBB -->
+            <svg class="ml-shield-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Shield Background -->
+                <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0a1631" stroke="#ffcc00" stroke-width="2"/>
+                <!-- Stylized M -->
+                <path d="M30 70 L30 35 L50 55 L70 35 L70 70" fill="none" stroke="#ffcc00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Wing Accents -->
+                <path d="M20 30 L5 25 M80 30 L95 25" stroke="#ffcc00" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <p class="font-orbitron text-[12px] tracking-[0.6em] text-yellow-500 mt-6 uppercase font-bold">Loading</p>
     </div>
 
-    <!-- MAIN APP -->
-    <div id="main-content" class="flex flex-col items-center justify-center p-6">
-        
-        <div class="w-full max-w-md">
+    <!-- GET STARTED SCREEN -->
+    <div id="get-started">
+        <div class="w-full max-w-md glass p-10 rounded-[2.5rem] shadow-2xl">
+            <h1 class="font-orbitron text-2xl font-bold italic mb-6 text-yellow-500 text-center">Mod Menu Info:</h1>
             
-            <!-- HEADER -->
-            <div class="text-center mb-8">
-                <div class="inline-block p-4 glass rounded-3xl mb-4">
-                    <span class="text-4xl font-bold font-orbitron text-blue-500">M</span>
+            <ul class="feature-list font-orbitron uppercase text-xs tracking-widest text-gray-200">
+                <li><i class="fas fa-eye"></i> Drone View (2x - 10x)</li>
+                <li><i class="fas fa-broadcast-tower"></i> ESP (Hero & Box)</li>
+                <li><i class="fas fa-tshirt"></i> Skin Unlocker (All Skins)</li>
+                <li><i class="fas fa-crosshairs"></i> Auto Aim / Lock</li>
+                <li><i class="fas fa-user-shield"></i> Anti-Ban Security</li>
+                <li><i class="fas fa-tachometer-alt"></i> 120 FPS Unlock</li>
+            </ul>
+
+            <button onclick="enterDashboard()" class="btn-gold w-full py-4 mt-8 text-lg font-bold font-orbitron uppercase italic flex items-center justify-center gap-3">
+                Get Started <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="main-content" class="min-h-screen flex flex-col items-center justify-center p-6">
+        <div class="w-full max-w-md">
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <div class="inline-block mb-4">
+                    <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 5 L85 20 L85 55 C85 75 50 95 50 95 C50 95 15 75 15 55 L15 20 L50 5 Z" fill="#0066ff22" stroke="#ffcc00" stroke-width="3"/>
+                        <path d="M30 70 L30 35 L50 55 L70 35 L70 70" fill="none" stroke="#ffcc00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-                <h1 class="text-3xl font-bold uppercase tracking-tight italic" style="font-family: 'Orbitron';">
-                    MLBB <span class="text-blue-500">2026</span>
+                <h1 class="text-4xl font-bold uppercase tracking-tight italic font-orbitron">
+                    MLBB <span class="text-yellow-500">2026</span>
                 </h1>
-                <div class="flex items-center justify-center gap-2 mt-2">
-                    <span class="status-dot"></span>
-                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">VIP Bypass Active</span>
-                </div>
+                <p class="text-[10px] uppercase font-bold text-blue-400 tracking-[0.5em] mt-2">Elite VIP Access</p>
             </div>
 
             <!-- DOWNLOAD CARD -->
-            <div class="glass p-8 rounded-[2.5rem] shadow-2xl space-y-5 text-center">
-                <div class="space-y-1 pb-4">
-                    <p class="text-gray-400 text-sm font-medium">Available Mod Packages</p>
-                </div>
-
-                <div class="grid gap-4">
-                    <!-- MIRROR 1 -->
-                    <button onclick="downloadMirror1()" class="btn-blue w-full py-5 text-lg font-bold uppercase italic flex items-center justify-center gap-3">
-                        <i class="fas fa-download"></i> Mod Menu MLBB
+            <div class="glass p-10 rounded-[3rem] shadow-2xl space-y-6 text-center border-b-4 border-yellow-500">
+                <div class="grid gap-5">
+                    <!-- Unang Button -->
+                    <button onclick="downloadMirror1()" class="bg-blue-600 hover:bg-blue-500 w-full py-5 text-lg font-bold uppercase italic flex items-center justify-center gap-3 rounded-xl transition-all shadow-lg shadow-blue-900/40">
+                        <i class="fas fa-cloud-download-alt"></i> Mod Menu MLBB
                     </button>
 
-                    <!-- MIRROR 2 -->
-                    <button onclick="downloadMirror2()" class="btn-alt w-full py-5 text-lg font-bold uppercase italic flex items-center justify-center gap-3">
-                        <i class="fas fa-link text-blue-400"></i> MLBB Mod Menu
+                    <!-- Pangalawang Button -->
+                    <button onclick="downloadMirror2()" class="btn-gold w-full py-5 text-[11px] sm:text-xs font-bold uppercase italic flex items-center justify-center gap-3">
+                        <i class="fas fa-crown"></i> DOWNLOAD MLBB VIP MOD MENU
                     </button>
                 </div>
-
-                <p class="text-[10px] text-gray-500 uppercase font-bold pt-4">S31 Optimized Build</p>
+                <p class="text-[9px] text-gray-500 uppercase font-bold tracking-widest pt-2">System Version 3.1.24 - SECURED</p>
             </div>
-
-            <!-- FEATURE ROW -->
-            <div class="grid grid-cols-2 gap-3 mt-6">
-                <div class="glass p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-eye text-blue-500 text-xs"></i>
-                    <span class="text-[10px] font-bold uppercase">Drone View</span>
-                </div>
-                <div class="glass p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-crosshairs text-blue-500 text-xs"></i>
-                    <span class="text-[10px] font-bold uppercase">Auto Lock</span>
-                </div>
-                <div class="glass p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-ghost text-blue-500 text-xs"></i>
-                    <span class="text-[10px] font-bold uppercase">ESP Radar</span>
-                </div>
-                <div class="glass p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-shield-alt text-blue-500 text-xs"></i>
-                    <span class="text-[10px] font-bold uppercase">Anti-Ban</span>
-                </div>
-            </div>
-
         </div>
-
     </div>
 
     <script>
+        // Loading Logic
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
+                const getStarted = document.getElementById('get-started');
                 loader.style.opacity = '0';
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    document.body.classList.add('ready');
+                    getStarted.style.display = 'flex';
                 }, 400);
-            }, 1800);
+            }, 2500);
         });
 
+        // Dashboard Transition
+        function enterDashboard() {
+            const getStarted = document.getElementById('get-started');
+            getStarted.style.opacity = '0';
+            setTimeout(() => {
+                getStarted.style.display = 'none';
+                document.body.classList.add('ready');
+            }, 400);
+        }
+
+        // Mirror 1 Download
         function downloadMirror1() {
             const id = '173n6LOfeSKB7CGXLEGrvAtOoRObv36CH';
             window.location.href = `https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t`;
         }
 
+        // Mirror 2 Download (VIP MOD)
         function downloadMirror2() {
-            window.location.href = 'https://files.5modapk.com/ROOT/All%20Documents%20File/Folder%201/2%20Mobile%20Legends%20Bang%20Bang/Mobile-Legends-Bang-Bang-v2.1.31.11233-MOD-GMA-(Getmodsapk.com).apk';
+            window.location.href = 'https://drive.usercontent.google.com/download?id=1FjdDnYoayJIEm4BJDYxa0lbv2VZQcfiw&export=download&authuser=0';
         }
     </script>
 </body>
