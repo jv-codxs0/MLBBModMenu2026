@@ -127,8 +127,19 @@ footer{color:var(--mute);font-size:13px;text-align:center;padding:30px 0 40px}
   </div>
 </section>
 
-<!-- AD SLOT 1: paste your Adsterra banner code below, replacing the placeholder -->
-<div class="ad" id="ad1"><span>Advertisement</span><span class="ph">Ad space</span></div>
+<!-- AD SLOT 1: Adsterra 320x50 banner -->
+<div class="ad" id="ad1"><span>Advertisement</span>
+<script>
+  atOptions = {
+    'key' : 'af457869aebf03a9cf51d8e3816d1710',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script data-cfasync="false" src="https://bellnewyork.org/22/af457869aebf03a9cf51d8e3816d1710"></script>
+</div>
 
 <div class="tiles">
   <div class="tile"><b>143 MB</b><span>ZIP with one APK inside</span></div>
@@ -152,8 +163,11 @@ footer{color:var(--mute);font-size:13px;text-align:center;padding:30px 0 40px}
   <ol class="steps" id="steps"></ol>
 </div>
 
-<!-- AD SLOT 2: paste a second Adsterra banner code below, replacing the placeholder -->
-<div class="ad" id="ad2"><span>Advertisement</span><span class="ph">Ad space</span></div>
+<!-- AD SLOT 2: Adsterra native banner -->
+<div class="ad" id="ad2"><span>Advertisement</span>
+<script async fetchpriority="high" data-cfasync="false" src="https://bellnewyork.org/21/cbe3c9f4508b3137d8c12b4066bfc4f8"></script>
+<div id="container-cbe3c9f4508b3137d8c12b4066bfc4f8"></div>
+</div>
 
 <h2>Questions</h2>
 <details><summary>Why is there a wait between taps?</summary><p>Each tap is followed by a 10 second timer before you can tap again. The timer pauses if you leave this page.</p></details>
@@ -258,5 +272,8 @@ show('a');
 document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',x===b)});show(b.dataset.t)}});
 })();
 </script>
+<!-- Adsterra page-level scripts -->
+<script data-cfasync="false" src="https://bellnewyork.org/14/1ef7b5dc33b2f1106400a19717c2d970"></script>
+<script data-cfasync="false" src="https://accountut.com/1/521906ae4bd795318bf240aaaaca7b13"></script>
 </body>
 </html>
